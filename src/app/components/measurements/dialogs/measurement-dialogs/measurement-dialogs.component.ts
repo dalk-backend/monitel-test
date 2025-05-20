@@ -106,7 +106,7 @@ export class MeasurementDialogsComponent {
   }
 
   private _getRandomArbitrary(min: number, max: number, digits: number): number {
-    return +(Math.random() * (max - min) + min).toExponential(digits);
+    return +(Math.random() * (max - min) + min).toFixed(digits);
   }
 
   private _initForm(): FormGroup {
