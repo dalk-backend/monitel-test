@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-title>
+    <span *ngIf="data?.id && dialogForm.disabled">Просмотр записи</span>
+    <span *ngIf="data?.id && dialogForm.enabled">Редактирование записи</span>
+    <span *ngIf="!data?.id">Создание записи</span>
+  </mat-card-title>
+  <mat-card-content>
+    <form role="form" [formGroup]="dialogForm" class="flex-column flex-gap-10">
+      <div class="flex-row flex-gap-8">
+        <mat-form-field class="flex-width-30">
+          <mat-label>Дата и время отбора</mat-label>
+          <input matInput [ngxMatDatetimePicker]="pickerSampling" placeholder="ДД.ММ.ГГГГ ЧЧ:ММ"
+                 formControlName="measurement_datetime">
+          <ngx-mat-datepicker-toggle [for]="pickerSampling" matSuffix></ngx-mat-datepicker-toggle>
+          <ngx-mat-datetime-picker [showSeconds]="true"
+                                   #pickerSampling [showSpinners]="true"></ngx-mat-datetime-picker>
+        </mat-form-field>
+        <mat-form-field class="flex-width-70">
+          <mat-label>Источник</mat-label>
+          <input matInput formControlName="source" required>
+          <mat-error *ngIf="getControl('source')?.invalid">
+            {{getValidatorErrorMessage(getControl('source'))}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex-row flex-gap-8">
+        <mat-form-field class="flex-width-150p">
+          <mat-label>Фаза</mat-label>
+          <input matInput formControlName="phase">
+        </mat-form-field>
+
+        <mat-form-field class="flex-width-150p">
+          <mat-label>U, kВ</mat-label>
+          <input matInput formControlName="voltage">
+        </mat-form-field>
+
+        <mat-form-field class="flex-width-150p">
+          <mat-label>I, A</mat-label>
+          <input matInput formControlName="current">
+        </mat-form-field>
+
+        <mat-form-field class="flex-width-150p">
+          <mat-label>P, MBt</mat-label>
+          <input matInput formControlName="power">
+        </mat-form-field>
+
+        <mat-form-field class="flex-width-150p">
+          <mat-label>Q, Mвар</mat-label>
+          <input matInput formControlName="reactive_power">
+        </mat-form-field>
+
+        <mat-form-field class="flex-width-150p">
+          <mat-label>cos ϕ</mat-label>
+          <input matInput formControlName="cos_phase">
+        </mat-form-field>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="flex-row">
+    <div class="flex-row flex-grow flex-gap-8 flex-align-end">
+      <button class="flex-width-200p" mat-flat-button color="primary"
+              *ngIf="dialogForm.disabled" (click)="enableForm()">
+        Редактировать
+      </button>
+      <button class="flex-width-200p" mat-flat-button color="primary" [disabled]="dialogForm.invalid"
+              *ngIf="dialogForm.enabled" [mat-dialog-close]="dialogForm.getRawValue()">
+        Сохранить
+      </button>
+      <button class="flex-width-200p" mat-flat-button color="warn" mat-dialog-close>
+        Отмена
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,24 @@
+<mat-card class="flex-column flex-gap-10">
+  <mat-card-title>
+    <div class="flex-row flex-align-space-between">
+      <span>РТСН\НН-2</span>
+      <div class="flex-row flex-gap-8">
+        <button class="flex-width-150p" mat-raised-button color="primary" (click)="createMeasurementItem()">
+          <mat-icon>add</mat-icon>
+          Добавить
+        </button>
+        <button class="flex-width-150p" mat-raised-button color="warn"
+                [disabled]="selection.isEmpty()" (click)="removeSelectedItems()">
+          <mat-icon>delete_forever</mat-icon>
+          Удалить
+        </button>
+      </div>
+    </div>
+  </mat-card-title>
+  <mat-card-content class="flex-column">
+    <measurements-table [data]="measurementList$ | async"
+                        [selection]="selection"
+                        (editEvent)="updateMeasurementItem($event)"
+    ></measurements-table>
+  </mat-card-content>
+</mat-card>

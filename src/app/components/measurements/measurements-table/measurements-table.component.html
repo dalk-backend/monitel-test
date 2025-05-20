@@ -1,0 +1,79 @@
+<div class="flex-column height-100">
+  <mat-table class="flex-fill" [dataSource]="dataSource"
+             *ngIf="data && data?.length; else noData">
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="flex-width-80p">
+        <mat-checkbox matTooltip="Выделить все" matTooltipClass="custom-tooltip"
+                      (change)="$event ? masterToggle() : null"
+                      [checked]="selection?.hasValue() && isAllSelected()"
+                      [indeterminate]="selection?.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="flex-width-80p">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection?.toggle(row) : null"
+                      [checked]="selection?.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="measurement_date">
+      <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element?.measurement_datetime ? (element?.measurement_datetime | formatDateTime) : '-' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="measurement_time">
+      <mat-header-cell *matHeaderCellDef>Время</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element?.measurement_datetime ? (element?.measurement_datetime | formatDateTime: 'time') : '-' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="source">
+      <mat-header-cell *matHeaderCellDef>Источник</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.source || '-'}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phase">
+      <mat-header-cell *matHeaderCellDef>Фаза</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.phase || '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="voltage">
+      <mat-header-cell *matHeaderCellDef>U, kВ</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.voltage || '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="current">
+      <mat-header-cell *matHeaderCellDef>I, A</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.current || '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="power">
+      <mat-header-cell *matHeaderCellDef>P, MBt</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.power || '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reactive_power">
+      <mat-header-cell *matHeaderCellDef>Q, Mвар</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.reactive_power || '-' }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cos_phase">
+      <mat-header-cell *matHeaderCellDef>cos ϕ</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.cos_phase || '-' }}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-link"
+             (click)="editEvent.emit(row)">
+    </mat-row>
+  </mat-table>
+
+  <ng-template #noData>
+    <span class="default-no-data">Данных не найдено</span>
+  </ng-template>
+</div>

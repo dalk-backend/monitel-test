@@ -1,0 +1,58 @@
+mat-card {
+  padding: 10px;
+  height: 100%;
+}
+
+mat-card-title {
+  font-size: 1.4rem !important;
+}
+
+mat-card-content {
+  padding-top: 25px !important;
+}
+
+.mat-datepicker-content {
+  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+  background-color: #fff;
+  color: #000000de
+}
+
+.mat-calendar-body-selected {
+  background-color: #007f51;
+  color: #fff;
+}
+
+.mat-calendar-body-cell-content {
+  border: none !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+mat-tooltip-component > .mat-tooltip {
+  white-space: pre-line;
+}
+
+.mat-card-actions {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.default-no-data {
+  cursor: default;
+  display: flex;
+  place-content: center center;
+  align-items: center;
+  font-style: italic;
+  color: #6b6b6b;
+  font-size: 1.1em;
+}
+
+.table-row-link {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}

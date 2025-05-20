@@ -1,0 +1,12 @@
+<mat-card class="flex-column flex-gap-8">
+  <div class="default-page-header" *ngIf="data?.title">{{data.title}}</div>
+  <div class="default-message-container" [innerHTML]="data.message"></div>
+  <div class="flex-row flex-gap-12 flex-align-end flex-cross-center">
+    <button mat-stroked-button color="primary" [mat-dialog-close]="false" *ngIf="data?.cancelButtonTitle">
+      {{data.cancelButtonTitle}}
+    </button>
+    <button mat-flat-button color="warn" [mat-dialog-close]="true" *ngIf="data?.buttonTitle">
+      {{data.buttonTitle}}
+    </button>
+  </div>
+</mat-card>
